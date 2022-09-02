@@ -1,0 +1,15 @@
+[package]
+name = "magic-packet"
+version = "0.1.0"
+edition = "2021"
+description = "Utility to wake devices on the network with Wake on Lan (aka Magic Packets)."
+license = "MIT"
+repository = "https://github.com/dardanbujupaj/magic-packet/"
+homepage = "https://github.com/dardanbujupaj/magic-packet/"
+readme = "README.md"
+categories = ["command-line-utilities"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "3.2.19", features = ["derive"] }
