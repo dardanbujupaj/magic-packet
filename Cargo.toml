@@ -13,3 +13,5 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 clap = { version = "3.2.19", features = ["derive"] }
+pnet = {version = "0.31.0", features = ["std"]}
+pnet_datalink = "0.31.0"
