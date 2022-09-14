@@ -53,7 +53,7 @@ pub fn arping(mac: MacAddr) -> Result<(), MagicError> {
     arp_packet.set_proto_addr_len(4);
     arp_packet.set_operation(ArpOperations::Request);
     arp_packet.set_sender_hw_addr(interface_mac);
-    arp_packet.set_sender_proto_addr(Ipv4Addr::new(192, 168, 1, 191));
+    arp_packet.set_sender_proto_addr(Ipv4Addr::new(192, 168, 1, 97));
     arp_packet.set_target_hw_addr(mac);
     arp_packet.set_target_proto_addr(Ipv4Addr::BROADCAST);
 
@@ -71,7 +71,7 @@ pub fn arping(mac: MacAddr) -> Result<(), MagicError> {
                 if ether_packet.get_ethertype() == EtherTypes::Arp {
                     let response = ArpPacket::new(ether_packet.payload()).expect("could not unpack arp");
 
-                    println!("ARP from: {}/{}", response.get_sender_hw_addr(), response.get_sender_proto_addr());
+                    println!("ARP {} from: {}/{}", response.get_operation().0, response.get_sender_hw_addr(), response.get_sender_proto_addr());
                 }
             }
             None => ()
