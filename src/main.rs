@@ -1,5 +1,5 @@
 use clap::Parser;
-use magic_packet::magic::MagicPacket;
+
 use pnet_datalink::MacAddr;
 use std::error::Error;
 

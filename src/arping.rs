@@ -1,21 +1,19 @@
 use pnet::datalink;
 use pnet::datalink::Channel::Ethernet;
-use pnet::packet::arp::{
-    Arp, ArpHardwareTypes, ArpOperation, ArpOperations, ArpPacket, MutableArpPacket,
-};
-use pnet::packet::ethernet::{EtherType, EtherTypes, EthernetPacket, MutableEthernetPacket};
+
+use pnet::packet::ethernet::{EtherTypes, EthernetPacket, MutableEthernetPacket};
 use pnet::packet::icmp;
 use pnet::packet::icmp::echo_reply::EchoReplyPacket;
-use pnet::packet::icmp::echo_request::{IcmpCodes, MutableEchoRequestPacket, EchoRequestPacket};
+use pnet::packet::icmp::echo_request::{MutableEchoRequestPacket, EchoRequestPacket};
 use pnet::packet::icmp::{
-    echo_reply, IcmpCode, IcmpPacket, IcmpType, IcmpTypes, MutableIcmpPacket,
+    IcmpPacket, IcmpTypes,
 };
 use pnet::packet::ip::IpNextHeaderProtocols;
-use pnet::packet::ipv4::{self, Ipv4};
+use pnet::packet::ipv4::{self};
 use pnet::packet::ipv4::{Ipv4Packet, MutableIpv4Packet};
 use pnet::packet::Packet;
 use pnet::util::MacAddr;
-use std::convert::TryInto;
+
 use std::net::Ipv4Addr;
 use std::str::FromStr;
 
@@ -31,7 +29,7 @@ pub fn arping(mac: MacAddr) -> Result<(), MagicError> {
 
     println!("{interface}");
 
-    let (mut tx, mut rx) = match datalink::channel(&interface, Default::default()) {
+    let (mut tx, mut rx) = match datalink::channel(interface, Default::default()) {
         Ok(Ethernet(tx, rx)) => (tx, rx),
         Ok(_) => panic!("Unhandled channel type"),
         Err(e) => panic!(
@@ -83,7 +81,7 @@ pub fn arping(mac: MacAddr) -> Result<(), MagicError> {
     tx.send_to(ethernet_packet.packet(), None).unwrap().unwrap();
 
     loop {
-        let mut buf: [u8; 1600] = [0u8; 1600];
+        let _buf: [u8; 1600] = [0u8; 1600];
 
         let packet = rx.next()?;
 
