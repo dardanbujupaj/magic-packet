@@ -13,7 +13,7 @@ pub enum MagicError {
     ParseInt(ParseIntError),
     InvalidMac,
     IoError(std::io::Error),
-    NoInterfaceFound
+    NoInterfaceFound,
 }
 
 impl Error for MagicError {}
